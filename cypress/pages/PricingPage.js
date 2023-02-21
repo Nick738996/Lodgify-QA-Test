@@ -1,5 +1,6 @@
 export class PricingPage {
   constructor() {
+    // Selectors
     this.yearlyPlanButton = ".nav-magic-line";
     this.yearlyPlanTitle = ".col-md-4";
     this.rentalNumberTitle = ".property-scroll-box-title";
@@ -34,19 +35,39 @@ export class PricingPage {
     this.mobileMenuButton = ".btn-mobile-bar";
     this.mobileMenu = "#mobile-menu";
     this.mobileBody = ".content-wrapper";
+
+    // Variables for long texts and extra elements
+    this.waitingTime = 1000;
+    this.timeElements = { timeout: 5000 };
+    this.timePageLoad = { timeout: 10000 };
+    this.pricingPageTitle =
+      "Lodgify Pricing | Affordable Vacation Rental Software From $11";
+    this.currencyText = "Do you want to see other currencies?";
+    this.startFreeTrialHref = "https://www.lodgify.com/signup";
+    this.loginButtonHref = "https://www.lodgify.com/login";
+    this.logifyHomeUrl = "https://www.lodgify.com/";
+    this.getInTouchLogo =
+      "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_account-management.svg";
+    this.getInTouchHref = "https://use.lodgify.com/contact";
+    this.helpCenterLogo =
+      "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_help-center.svg";
+    this.helpCenterHref = "https://help.lodgify.com/hc/en-us";
+    this.onlineChatLogo =
+      "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_support.svg";
+    this.onlineChatText =
+      "Connect with our sales agents if you have any other questions.";
+    this.pricingPageSlogan =
+      "Vacation rental software pricing that scales as you grow";
   }
 
   visitPricingPage() {
-    cy.visit("/pricing.html", { timeout: 10000 });
-    cy.wait(2000);
+    cy.visit(Cypress.env("pricingPage")), this.timePageLoad;
+    cy.wait(this.waitingTime);
   }
 
   // Header
   validatePricingPageTitle() {
-    cy.title().should(
-      "include",
-      "Lodgify Pricing | Affordable Vacation Rental Software From $11"
-    );
+    cy.title().should("include", this.pricingPageTitle);
   }
 
   // Rental Numbers
@@ -94,22 +115,21 @@ export class PricingPage {
 
   //Currency Change
   validateCurrencyLabel() {
-    cy.get(this.currencyLabel).contains("Do you want to see other currencies?");
+    cy.get(this.currencyLabel).contains(this.currencyText);
   }
   validateCurrencySelector() {
     cy.get(this.currencySelector).should("be.visible");
   }
-
   //Euros €
   currencyToEuros() {
     cy.get(this.currencySelector).select("eur").contains("€ EUR");
   }
+
   validateDefaultPlansPriceEuros() {
     cy.get(this.starterPlanPrice).contains("11€");
     cy.get(this.professionalPlanPrice).contains("28€");
     cy.get(this.ultimatePlanPrice).contains("43€");
   }
-
   //Dollars $
   currencyToDollars() {
     cy.get(this.currencySelector).select("usd").contains("$ USD");
@@ -119,7 +139,6 @@ export class PricingPage {
     cy.get(this.professionalPlanPrice).contains("$32");
     cy.get(this.ultimatePlanPrice).contains("$48");
   }
-
   //Pounds £
   currencyToPounds() {
     cy.get(this.currencySelector).select("gbp").contains("£ GBP");
@@ -156,93 +175,74 @@ export class PricingPage {
 
   //Start Free Trial Button
   validateStartFreeTrialBtn() {
-    cy.get(this.startFreeTrialButton, { timeout: 2000 })
+    cy.get(this.startFreeTrialButton, this.timeElements)
       .should("be.visible")
-      .and("have.attr", "href", "https://www.lodgify.com/signup")
+      .and("have.attr", "href", this.startFreeTrialHref)
       .contains("Start Free Trial");
   }
 
   //Login
   validateLoginBtn() {
-    cy.get(this.loginButton, { timeout: 2000 })
+    cy.get(this.loginButton, this.timeElements)
       .should("be.visible")
-      .and("have.attr", "href", "https://www.lodgify.com/login")
+      .and("have.attr", "href", this.loginButtonHref)
       .contains("Login");
   }
 
   //Logo
   validateLogo() {
-    cy.get(this.headLogo).should(
-      "have.attr",
-      "href",
-      "https://www.lodgify.com/"
-    );
-    cy.get(this.logo, { timeout: 2000 })
+    cy.get(this.headLogo).should("have.attr", "href", this.logifyHomeUrl);
+    cy.get(this.logo, this.timeElements)
       .should("be.visible")
       .contains("Lodgify Logo");
   }
 
   //We'here to Help section
   validateGetInTouchSection() {
-    cy.get(this.getInTouchSection, { timeout: 2000 })
+    cy.get(this.getInTouchSection, this.timeElements)
       .should("be.visible")
       .find("img")
-      .and(
-        "have.attr",
-        "src",
-        "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_account-management.svg"
-      );
+      .and("have.attr", "src", this.getInTouchLogo);
     cy.get(this.getInTouchSection).find("h4").contains("Get in touch");
     cy.get(this.getInTouchSection)
       .find("a")
-      .should("have.attr", "href", "https://use.lodgify.com/contact");
+      .should("have.attr", "href", this.getInTouchHref);
   }
   validateHelpCenterSection() {
-    cy.get(this.helpCenterSection, { timeout: 2000 })
+    cy.get(this.helpCenterSection, this.timeElements)
       .should("be.visible")
       .find("img")
-      .and(
-        "have.attr",
-        "src",
-        "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_help-center.svg"
-      );
+      .and("have.attr", "src", this.helpCenterLogo);
     cy.get(this.helpCenterSection).find("h4").contains("Help center");
     cy.get(this.helpCenterSection)
       .find("a")
-      .should("have.attr", "href", "https://help.lodgify.com/hc/en-us");
+      .should("have.attr", "href", this.helpCenterHref);
   }
   validateOnlineChatSection() {
-    cy.get(this.onlineChatSection, { timeout: 2000 })
+    cy.get(this.onlineChatSection, this.timeElements)
       .should("be.visible")
       .find("img")
-      .and(
-        "have.attr",
-        "src",
-        "./Lodgify Pricing _ Affordable Vacation Rental Software From $11_files/icon_support.svg"
-      );
+      .and("have.attr", "src", this.onlineChatLogo);
     cy.get(this.onlineChatSection).find("h4").contains("Online chat");
   }
 
   //Mobile Version
   validateMobileVersion() {
+    const waitTime = cy.wait(this.waitingTime);
     cy.viewport(365, 667);
-    cy.get(this.mobileMenuButton, { timeout: 4000 })
+    cy.get(this.mobileMenuButton, this.timeElements)
       .should("be.visible")
       .click();
-    cy.wait(1000);
-    cy.get(this.mobileMenu, { timeout: 4000 }).should("be.visible");
-    cy.get(this.mobileMenuButton, { timeout: 4000 }).click();
+    waitTime;
+    cy.get(this.mobileMenu, this.timeElements).should("be.visible");
+    cy.get(this.mobileMenuButton, this.timeElements).click();
     cy.get(this.onlineChatSection)
       .find("p")
-      .contains(
-        "Connect with our sales agents if you have any other questions."
-      )
+      .contains(this.onlineChatText)
       .scrollIntoView();
-    cy.wait(2000);
-    cy.contains(
-      "Vacation rental software pricing that scales as you grow"
-    ).scrollIntoView();
-    cy.wait(2000);
+    waitTime;
+    cy.contains(this.pricingPageSlogan).scrollIntoView();
+    waitTime;
   }
 }
 
