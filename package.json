@@ -15,8 +15,8 @@
   "scripts": {
     "dev-server": "node server/server.js",
     "install-all": "npm install && cd server && npm install",
-    "cy:open": "npx cypress open",
-    "cy:run": "npx cypress run --browser chrome",
+    "cy:open:qa": "npx cypress open",
+    "cy:run:qa": "npx cypress run --browser chrome",
     "cy:open:dev": "npx cypress open --config-file cypress.dev.json",
     "cy:run:dev": "npx cypress run --browser chrome --config-file cypress.dev.json"
   }
