@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Brandon Gomez",
+    "countryCode": "ES",
+    "number": 123456789,
+    "email": "Brandon@email.com",
+    "guests": 3,
+    "arrivalDate": "14/04/2023",
+    "departureDate": "14/06/2023",
+    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  },
+
+  {
+    "name": "Carlo Pregueiro",
+    "countryCode": "PT",
+    "number": 9876523423,
+    "email": "Carlos@email.com",
+    "guests": 4,
+    "arrivalDate": "21/12/2024",
+    "departureDate": "21/12/2025",
+    "comment": "Lorem ipsum Aliquam sem fringilla ut morbi tincidunt augue interdum velit euismod."
+  }
+]

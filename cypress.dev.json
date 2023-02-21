@@ -1,7 +1,6 @@
 {
   "viewportWidth": 1920,
   "viewportHeight": 1080,
-  "chromeWebSecurity": false,
   "env": {
     "baseUrl": "http://localhost:8080",
     "pricingPage": "http://localhost:8080/pricing.html",
