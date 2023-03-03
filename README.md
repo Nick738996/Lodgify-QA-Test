@@ -1,74 +1,63 @@
-Open Lodgify-Automation-QA-Test as a project to get started
+Lodgify QA Test by Brandon Gomez
 
-The following instructions use Bash, so make sure to install Git Bash before running the commands.
+In this project, I will be using Cypress to automate Lodgify web application with two different pages. I will be testing the application on two environments, you can switch between "QA" or "Development" environment. This will help us catch any bugs or issues before they make it to production, and ensure that the application is working as expected.
 
-1. Download Node.js from https://nodejs.org/es/download/ and then execute "$ npm run install-all". 
-2. You will need to start a local server to run tests, execute "$ npm run dev-server" in a different terminal, leave this terminal open.
-3. To run your test, you should test files inside "cypress/integration/testName.test.js" (where "testName" is the name of the test you're adding).
-4. Run the tests with $ "npm run cy:run"
-5. You should be able to run and check tests results with these steps, now you can proceed with the requirements below, which you will also find in the Test file.
-6. You can create folders for selectors anywhere, the whole structure is up to you, try not to hardcode and create a clean test structure.
-7. Make sure to do smart waits in case slowness on services.
-8. Tests should be able to run on any environment.
+# Test Structure:
 
-## How we'd like to receive the solution?
+I include all tests in only file "basic.test.cy.js" located in cypress/integration, it contains 6 test suites to cover all the steps required. In total I design a number of 36 test cases, 4 of them failed since they did not meet the requirements.
 
-Clone this repository and upload it as a new public repository in your GitHub account
-Create a new branch in your repository
-Create a pull request with the requested functionality to unchanged master branch in your repository
-Share link to the PR with us
+## Lodgify Pricing Page - Yearly Plan Price (Step 1)
 
-Quick start commands:
-## Installing
+Verifies that the pricing page contains the expected elements and that the layout is correct. Also, it validates users can select a plan with a different number of rentals and its price is displayed according to the plan.
+
+## Lodgify Pricing Page - Currency change (Step 2)
+
+Tests that the pricing options are displayed correctly in different currencies.
+
+## Lodgify Pricing Page - Extra coverage (Step 3)
+
+Tests extra functionalities provided in the Pricing Page based in my own criteria such as mobile version, header elements, or Start Free Trial button.
+
+## Lodgify Contact Page - Form inputs (Step 4)
+
+Tests that the contact page contains the expected elements and that the form is correctly displayed with the right inputs and mandatory messages.
+
+## Lodgify Contact Page - Filling and deleting form (Step 4)
+
+Tests that the contact form can be filled, submitted, and deleted correctly.
+
+## Lodgify Contact Page - Extra coverage (Step 5)
+
+Tests extra functionalities provided in the contact page based in my own criteria such as mobile version, header, footer elements, or Book Now button.
+
+# Data and Pages for testing
+
+Important data used across different test suites is stored in a file named "data.json" located in the cypress/fixtures folder.
+
+I created a folder called "Pages" located in cypress/pages with 2 files representing each page required to test, Pricing and Contact Page, with the main goal of representing and using all the locators and functions related to that particular page.
+
+# Environments
+
+To run the tests, I used Cypress's built-in support for different environments. In the cypress.json file, we have defined two different environments: Dev and QA.
+
+# Execute Test
+
+Run tests in QA:
+
 ```
-$ npm run install-all
-```
-## Starting mock up server (leave a terminal open for this command, and run the test in another terminal)
-```
-$ npm run dev-server
-
-Note: by default, server.js is using your port 8080, feel free to change it in case you're using it for something else, port 3000 would also be a good alternative. (node server/server.js)
-```
-## Execute Tests
-```
-$ npm run cy:run
+npm run cy:run:qa
 ```
 
-Challengue Requirements:
+Run tests in Dev:
 
-Two HTML files are provided:
+```
+npm run cy:run:dev
+```
 
-*Pricing page: This page allows the users to select different pricing options.
-*Contact page: This page allows the users to fill a form and then send an email.
+You can add additional environments by creating a new cypress.json file: Ex: cypress.prod.json
 
-These simpler version of those pages will require you to add the following tests:
+You can modify existing ones by changing cypress.json or cypress.dev.json. Check package.json for more information about scripts.
 
-Steps:
+# Bugs
 
-1. On "Lodgify Pricing" page, add a test to verify that the "Yearly" plan selecting 50 rentals displays: 
-   $64 for Starter plan
-   $375 for Professional plan
-   $525 for Ultimate plan
-2. On "Lodgify Pricing" page, add a test to verify that the change of currency (located just below the pricing options) properly changes the currency of the pricing options. 
-   The way you do so, and the extra verification steps are up to you (such as verifying the currency price difference)
-3. Using your own criteria, add tests according to what you think should be important to cover in this page "Lodgify Pricing". (Optional)
-4. On "Contact" page, add a test to verify that the field validations appear according to the following requirements. 
-   "Name" is mandatory and a message should be displayed in case this field is left empty
-   "Phone number" is mandatory and a message should be displayed in case this field is left empty
-   "Email address" is mandatory and a message should be displayed in case this field is left empty
-   "Comment" is mandatory and a message should be displayed in case this field is left empty
-   This test should pick the date of arrival "April 14th" and date of departure "June 14" to verify the datepicker is working as expected
-   This test should also add a random Lorem Ipsum of your choice to "Comment" field
-5. Using your own criteria, add tests according to what you think should be important to cover in this page "Contact". (Optional)
-
-
-IMPORTANT NOTE: Some tests, if followed the requirements correctly, will fail. For those, add an example of a bug report in the test document. 
-
-
-## Troubleshooting
-
-Using the provided steps, everything should work as explained, if not, make sure your Node.js is updated. In case you have any issues with Cypress.io, you can always install another test framework. In these cases, please also add extra information in the README. 
-
-In case you change your configuration, make sure to change your package.json file to run accordingly to avoid any kind of troubles or incompatibilities.
-
-Good luck!
+I add a folder named "bugs report" located in Lodgify-QA-Test/bug-report. In this folder, there is a .xlsx file where I reported all of the bugs found during the test execution.
